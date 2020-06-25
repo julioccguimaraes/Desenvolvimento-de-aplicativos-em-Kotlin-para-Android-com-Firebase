@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/fragmentOrderInfo">
+
+    <action
+        android:id="@+id/action_showOrderInfo"
+        app:destination="@id/fragmentOrderInfo" >
+        <argument
+            app:nullable="true"
+            android:name="orderInfo"
+            app:argType="string"/>
+    </action>
+
+    <action
+        android:id="@+id/action_showOrderList"
+        app:destination="@id/fragmentOrdersList" >
+    </action>
+
+    <fragment
+        android:id="@+id/fragmentOrderInfo"
+        android:name="com.julioguimaraes.projetofinaldm114.order.OrderInfoFragment"
+        android:label="fragment_order_info"
+        tools:layout="@layout/fragment_order_info" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentOrdersList"
+        android:name="com.julioguimaraes.projetofinaldm114.order.OrderListFragment"
+        android:label="fragment_orders_list"
+        tools:layout="@layout/fragment_orders_list" >
+    </fragment>
+</navigation>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ProjetoFinalDM114</string>
+    <string name="username">Username:</string>
+    <string name="orderid">OrderId:</string>
+    <string name="status">Status:</string>
+    <string name="product_code">Product Code:</string>
+</resources>
