@@ -14,7 +14,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/txtOrderId"
+            android:id="@+id/txtOrderListOrderId"
             android:layout_width="0dp"
             android:layout_height="61dp"
             android:layout_marginStart="8dp"
@@ -28,13 +28,13 @@
             android:textAlignment="viewStart"
             android:textSize="14sp"
             android:textStyle="normal"
-            app:layout_constraintEnd_toStartOf="@+id/txtOrderStatus"
+            app:layout_constraintEnd_toStartOf="@+id/txtOrderListOrderStatus"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="1" />
 
         <TextView
-            android:id="@+id/txtOrderStatus"
+            android:id="@+id/txtOrderListOrderStatus"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -48,12 +48,12 @@
             android:textAlignment="center"
             android:textSize="14sp"
             android:textStyle="normal"
-            app:layout_constraintEnd_toStartOf="@+id/txtOrderDate"
+            app:layout_constraintEnd_toStartOf="@+id/txtOrderListOrderDate"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Pedido entregue" />
 
         <TextView
-            android:id="@+id/txtOrderDate"
+            android:id="@+id/txtOrderListOrderDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
