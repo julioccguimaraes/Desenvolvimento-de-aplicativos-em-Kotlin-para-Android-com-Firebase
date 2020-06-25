@@ -15,7 +15,7 @@ class OrderListViewModel: ViewModel() {
         get() = _orders
 
     init {
-        getOrders()
+       getOrders()
     }
 
     private fun getOrders() {

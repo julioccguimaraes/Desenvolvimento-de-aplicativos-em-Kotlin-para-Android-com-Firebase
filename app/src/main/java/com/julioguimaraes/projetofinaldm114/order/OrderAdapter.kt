@@ -39,7 +39,6 @@ class OrderAdapter(val onOrderClickListener: OrderClickListener) :
             firebaseAnalytics.logEvent("attempt_delete_order", bundle)
             true
         }
-
     }
 
     class OrderViewHolder(private var binding: ItemOrderBinding):
