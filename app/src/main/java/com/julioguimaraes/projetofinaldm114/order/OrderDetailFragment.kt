@@ -24,11 +24,10 @@ class OrderDetailFragment : Fragment() {
 
         Log.i(TAG, "Creating OrderDetailFragment")
 
-        val binding = FragmentOrderDetailBinding.inflate(inflater)
+        binding = FragmentOrderDetailBinding.inflate(inflater)
 
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
 
-        //Fetch the orderId and create the ViewModel here
         orderId = OrderDetailFragmentArgs.fromBundle(requireArguments()).orderId
 
         val orderDetailViewModelFactory = OrderDetailViewModelFactory(orderId)
@@ -36,6 +35,10 @@ class OrderDetailFragment : Fragment() {
         binding.orderDetailViewModel = ViewModelProviders.of(
             this, orderDetailViewModelFactory).get(OrderDetailViewModel::class.java)
 
+        /*
+        Verificando, com base na configuração do Firebase Remote Config,
+        se a função de exclusão de eventos vai estar ou não disponível
+         */
         val remoteConfig = Firebase.remoteConfig
         setHasOptionsMenu(remoteConfig.getBoolean("delete_detail_view"))
 
@@ -51,13 +54,18 @@ class OrderDetailFragment : Fragment() {
             R.id.delete_order -> {
                 binding.orderDetailViewModel?.deleteOrder()
 
-                //val firebaseAnalytics = FirebaseAnalytics.getInstance(this.context!!)
+                /*
+                Gera um evento no Firebase Analytics quando o usuário exclui
+                um evento de um pedido
+                 */
                 val firebaseAnalytics = FirebaseAnalytics.getInstance(this.requireContext())
                 val bundle = Bundle()
+
                 bundle.putString(FirebaseAnalytics.Param.ITEM_ID, orderId)
                 firebaseAnalytics.logEvent("delete_item", bundle)
 
                 findNavController().popBackStack()
+
                 true
             }
             else -> super.onOptionsItemSelected(item)

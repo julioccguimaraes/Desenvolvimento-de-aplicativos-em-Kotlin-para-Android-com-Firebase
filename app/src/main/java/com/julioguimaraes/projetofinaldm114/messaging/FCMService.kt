@@ -35,11 +35,15 @@ class FCMService : FirebaseMessagingService() {
 
             if (user != null) {
 
-                // a mensagem é gerada somente se é destinada para o mesmo usuário logado no app
+                /*
+                A mensagem é gerada somente se é destinada para o mesmo usuário logado no app
+                 */
                 if (remoteMessage.data.containsKey("orderDetail") && user.email == order.username) {
                     sendOrderNotification(remoteMessage.data.get("orderDetail")!!)
 
-                    // salvando o evento no Firestore
+                    /*
+                    Salvando a informação do pedido, originada da notificação, no Firestore
+                     */
                     saveOrder(order)
                 }
             }

@@ -11,7 +11,6 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.navigation.findNavController
 import com.firebase.ui.auth.AuthUI
-import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.FirebaseApp
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
@@ -28,18 +27,23 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        /*
+        Fazendo login do usuário no Firebase Authentication
+         */
         FirebaseApp.initializeApp(this)
         val user = FirebaseAuth.getInstance().currentUser
+
         if (user != null) {
-            val name = user.displayName
-            val email = user.email
             setContentView(R.layout.activity_main)
+
+            /*
+            Criando a instância do Firebase Remote Config
+             */
             setFirebaseRemoteConfig()
 
             if (this.intent.hasExtra("order")) {
                 showOrderInfo(intent.getStringExtra("order")!!)
             }
-
         } else {
             val providers = arrayListOf(AuthUI.IdpConfig.GoogleBuilder().build())
 
@@ -67,11 +71,12 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == 1) {
-            val response = IdpResponse.fromResultIntent(data)
-
             if (resultCode == Activity.RESULT_OK) {
-                val user = FirebaseAuth.getInstance().currentUser
                 setContentView(R.layout.activity_main)
+
+                /*
+                Criando a instância do Firebase Remote Config
+                 */
                 setFirebaseRemoteConfig()
             } else {
                 Toast.makeText(this, "Sign in failed", Toast.LENGTH_SHORT).show()
@@ -96,15 +101,17 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.nav_event_history -> {
-                Log.d(TAG, "Event History clicked")
+                Log.d(TAG, "Event history clicked")
+
                 this.findNavController(R.id.nav_host_fragment)
                     .navigate(OrderListFragmentDirections.actionShowOrderList())
 
                 /*
-                * Gera evento quando o usuário exibe a lista de eventos dos pedidos
-                * */
+                Gera um evento no Firebase Analytics quando o usuário exibe
+                a lista de eventos dos pedidos
+                 */
                 val firebaseAnalytics = FirebaseAnalytics.getInstance(this)
-                firebaseAnalytics.logEvent("show_list_events", null)
+                firebaseAnalytics.logEvent("show_orders_list_event", null)
 
                 true
             }
@@ -114,12 +121,18 @@ class MainActivity : AppCompatActivity() {
 
     fun setFirebaseRemoteConfig() {
         val remoteConfig = Firebase.remoteConfig
+
         val configSettings = remoteConfigSettings {
             minimumFetchIntervalInSeconds = 60
         }
         remoteConfig.setConfigSettingsAsync(configSettings)
 
         val defaultConfigMap: MutableMap<String, Any> = HashMap()
+
+        /*
+        Configuração remota para habilitar/desatilitar a função de exclusão de eventos na tela
+        de detalhes de pedidos
+         */
         defaultConfigMap["delete_detail_view"] = true
 
         remoteConfig.setDefaultsAsync(defaultConfigMap)

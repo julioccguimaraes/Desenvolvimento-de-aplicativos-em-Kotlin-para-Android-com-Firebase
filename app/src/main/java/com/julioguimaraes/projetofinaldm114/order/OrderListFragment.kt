@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.julioguimaraes.projetofinaldm114.databinding.FragmentOrdersListBinding
 
 private const val TAG = "OrderListFragment"
@@ -33,6 +34,13 @@ class OrderListFragment : Fragment() {
 
         binding.rcvOrders.adapter = OrderAdapter(OrderAdapter.OrderClickListener {
             Log.i(TAG, "Order selected: ${it.orderId}")
+
+            /*
+            Gera um evento no Firebase Analytics quando o usuário exibe
+            os detalhes de um evento de pedido
+             */
+            val firebaseAnalytics = FirebaseAnalytics.getInstance(this.requireContext())
+            firebaseAnalytics.logEvent("show_order_detail_event", null)
 
             this.findNavController()
                 .navigate(OrderListFragmentDirections.actionShowOrderDetail(it.orderId!!))
