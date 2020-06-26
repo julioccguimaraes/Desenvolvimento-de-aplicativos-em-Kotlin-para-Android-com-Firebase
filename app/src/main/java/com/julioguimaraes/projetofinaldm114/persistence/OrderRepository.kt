@@ -71,11 +71,11 @@ object OrderRepository {
         return liveOrders
     }
 
-    fun getOrderByOrderId(code: String): MutableLiveData<Order> {
+    fun getOrderByOrderId(orderId: String): MutableLiveData<Order> {
         val liveOrder: MutableLiveData<Order> = MutableLiveData()
 
         firebaseFirestore.collection(COLLECTION)
-            .whereEqualTo(FIELD_ORDER_ID, code)
+            .whereEqualTo(FIELD_ORDER_ID, orderId)
             .whereEqualTo(FIELD_USER_ID, firebaseAuth.uid)
             .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
                 if (firebaseFirestoreException != null) {

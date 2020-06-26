@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="com.julioguimaraes.projetofinaldm114.order.DateFormat"/>
         <variable
             name="orderDetailViewModel"
             type="com.julioguimaraes.projetofinaldm114.order.OrderDetailViewModel" />
@@ -82,7 +81,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="@{DateFormat.dateToString(orderDetailViewModel.order.date)}"
+                app:orderDate="@{orderDetailViewModel.order.date}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />

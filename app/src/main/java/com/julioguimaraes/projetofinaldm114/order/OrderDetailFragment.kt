@@ -29,12 +29,12 @@ class OrderDetailFragment : Fragment() {
         binding.setLifecycleOwner(this)
 
         //Fetch the orderId and create the ViewModel here
-        orderId = OrderDetailFragmentArgs.fromBundle(arguments!!).orderId
+        orderId = OrderDetailFragmentArgs.fromBundle(requireArguments()).orderId
 
-        val productDetailViewModelFactory = OrderDetailViewModelFactory(orderId)
+        val orderDetailViewModelFactory = OrderDetailViewModelFactory(orderId)
 
         binding.orderDetailViewModel = ViewModelProviders.of(
-            this, productDetailViewModelFactory).get(OrderDetailViewModel::class.java)
+            this, orderDetailViewModelFactory).get(OrderDetailViewModel::class.java)
 
         val remoteConfig = Firebase.remoteConfig
         setHasOptionsMenu(remoteConfig.getBoolean("delete_detail_view"))

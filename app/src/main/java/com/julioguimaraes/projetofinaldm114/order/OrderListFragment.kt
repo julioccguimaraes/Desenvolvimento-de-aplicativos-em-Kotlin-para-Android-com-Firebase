@@ -33,6 +33,9 @@ class OrderListFragment : Fragment() {
 
         binding.rcvOrders.adapter = OrderAdapter(OrderAdapter.OrderClickListener {
             Log.i(TAG, "Order selected: ${it.orderId}")
+
+            this.findNavController()
+                .navigate(OrderListFragmentDirections.actionShowOrderDetail(it.orderId!!))
         })
 
         return binding.root
