@@ -23,3 +23,15 @@ fun bindOrderDate(txtOrderDate: TextView, orderDate: String?) {
         txtOrderDate.text = dateString
     }
 }
+
+@BindingAdapter("productPrice")
+fun bindProductPrice(txtProductPrice: TextView, productPrice: Double?) {
+    if(productPrice != null) {
+        productPrice?.let {
+            val price = "$ " + "%.2f".format(productPrice)
+            txtProductPrice.text = price
+        }
+    } else {
+        txtProductPrice.text = ""
+    }
+}
