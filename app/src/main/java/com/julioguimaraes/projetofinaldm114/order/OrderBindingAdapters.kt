@@ -8,15 +8,17 @@ import java.text.SimpleDateFormat
 
 @BindingAdapter("ordersList")
 fun bindOrdersList(recyclerView: RecyclerView, orders: List<Order>?) {
-    val adapter = recyclerView.adapter as OrderAdapter
-    adapter.submitList(orders)
+    orders?.let {
+        val adapter = recyclerView.adapter as OrderAdapter
+        adapter.submitList(orders)
+    }
 }
 
 @BindingAdapter("orderDate")
 fun bindOrderDate(txtOrderDate: TextView, orderDate: String?) {
     orderDate?.let {
         val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm")
-        val dateString: String = simpleDateFormat.format(orderDate)
+        val dateString: String = simpleDateFormat.format(orderDate.toLong())
 
         txtOrderDate.text = dateString
     }

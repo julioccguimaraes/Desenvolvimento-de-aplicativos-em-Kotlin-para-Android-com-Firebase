@@ -4,4 +4,12 @@
     <string name="orderid">OrderId:</string>
     <string name="status">Status:</string>
     <string name="product_code">Product Code:</string>
+    <string name="date">Date:</string>
+    <string name="product">Product</string>
+    <string name="name">Name:</string>
+    <string name="code">Code:</string>
+    <string name="price">Price:</string>
+    <string name="delete_order_detail">Delete order detail</string>
+    <string name="sign_out">Sign out</string>
+    <string name="event_history">Event History</string>
 </resources>

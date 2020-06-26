@@ -31,5 +31,20 @@
         android:name="com.julioguimaraes.projetofinaldm114.order.OrderListFragment"
         android:label="fragment_orders_list"
         tools:layout="@layout/fragment_orders_list" >
+        <action
+            android:id="@+id/action_showOrderDetail"
+            app:destination="@id/fragmentOrderDetail" >
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentOrderDetail"
+        android:name="com.julioguimaraes.projetofinaldm114.order.OrderDetailFragment"
+        android:label="fragment_order_detail"
+        tools:layout="@layout/fragment_order_detail" >
+        <argument
+            app:nullable="true"
+            android:name="orderId"
+            app:argType="string"/>
     </fragment>
 </navigation>

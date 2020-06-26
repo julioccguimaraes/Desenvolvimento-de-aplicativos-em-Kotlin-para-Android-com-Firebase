@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
-import com.google.firebase.analytics.FirebaseAnalytics
 import com.julioguimaraes.projetofinaldm114.databinding.FragmentOrdersListBinding
 
 private const val TAG = "OrderListFragment"
@@ -31,6 +30,10 @@ class OrderListFragment : Fragment() {
         val itemDecor = DividerItemDecoration(getContext(), VERTICAL)
 
         binding.rcvOrders.addItemDecoration(itemDecor)
+
+        binding.rcvOrders.adapter = OrderAdapter(OrderAdapter.OrderClickListener {
+            Log.i(TAG, "Order selected: ${it.orderId}")
+        })
 
         return binding.root
     }
