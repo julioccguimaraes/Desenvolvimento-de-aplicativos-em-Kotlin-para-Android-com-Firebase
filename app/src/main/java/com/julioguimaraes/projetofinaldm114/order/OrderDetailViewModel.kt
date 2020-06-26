@@ -1,7 +1,6 @@
 package com.julioguimaraes.projetofinaldm114.order
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.julioguimaraes.projetofinaldm114.network.Product
@@ -28,6 +27,9 @@ class OrderDetailViewModel(private val orderId: String?, private val productCode
 
     init {
         if (orderId != null && productCode != null) {
+            /*
+            Obtendo as informações do Pedido e do Produto
+             */
             getOrder(orderId)
             getProduct(productCode)
         } else {
