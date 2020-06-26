@@ -18,6 +18,7 @@ class OrderDetailFragment : Fragment() {
 
     private lateinit var binding: FragmentOrderDetailBinding
     private var orderId: String? = null
+    private var productCode: String? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -29,8 +30,9 @@ class OrderDetailFragment : Fragment() {
         binding.lifecycleOwner = this
 
         orderId = OrderDetailFragmentArgs.fromBundle(requireArguments()).orderId
+        productCode = OrderDetailFragmentArgs.fromBundle(requireArguments()).productCode
 
-        val orderDetailViewModelFactory = OrderDetailViewModelFactory(orderId)
+        val orderDetailViewModelFactory = OrderDetailViewModelFactory(orderId, productCode)
 
         binding.orderDetailViewModel = ViewModelProviders.of(
             this, orderDetailViewModelFactory).get(OrderDetailViewModel::class.java)

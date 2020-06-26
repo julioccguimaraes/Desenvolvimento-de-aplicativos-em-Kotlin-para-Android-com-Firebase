@@ -43,7 +43,7 @@ class OrderListFragment : Fragment() {
             firebaseAnalytics.logEvent("show_order_detail_event", null)
 
             this.findNavController()
-                .navigate(OrderListFragmentDirections.actionShowOrderDetail(it.orderId!!))
+                .navigate(OrderListFragmentDirections.actionShowOrderDetail(it.orderId!!, it.productCode!!))
         })
 
         return binding.root

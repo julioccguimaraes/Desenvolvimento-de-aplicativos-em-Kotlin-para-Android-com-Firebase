@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 
 private const val TAG = "OrderDetailViewModel"
 
-class OrderDetailViewModel(private val orderId: String?): ViewModel() {
+class OrderDetailViewModel(private val orderId: String?, private val productCode: String?): ViewModel() {
     // coroutines
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
@@ -27,18 +27,9 @@ class OrderDetailViewModel(private val orderId: String?): ViewModel() {
         get() = _product
 
     init {
-        if (orderId != null) {
+        if (orderId != null && productCode != null) {
             getOrder(orderId)
-
-            getProduct("COD1")
-            Log.i(TAG, "getOrder")
-            /*
-            if (order.value?.productCode != null) {
-                Log.i(TAG, "getProduct")
-                order.value!!.productCode?.let {
-                    getProduct(it)
-                }
-            }*/
+            getProduct(productCode)
         } else {
             order = MutableLiveData<Order>()
             order.value = Order()
@@ -70,7 +61,6 @@ class OrderDetailViewModel(private val orderId: String?): ViewModel() {
                 Log.i(TAG, "Error: ${e.message}")
             }
         }
-        Log.i(TAG, "Product requested by code")
     }
 
     fun deleteOrder() {
