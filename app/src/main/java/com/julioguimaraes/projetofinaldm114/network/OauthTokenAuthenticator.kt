@@ -26,10 +26,10 @@ class OauthTokenAuthenticator() : Authenticator {
     private fun retrieveNewToken(): OauthTokenResponse {
         Log.i(TAG, "Retrieving new token")
         return SalesApi.retrofitService.getToken(
-            "Basic c2llY29sYTptYXRpbGRl",
+            "Basic XXXXXX",
             "password",
-            "contato@julioguimaraes.com",
-            "123mudar"
+            "your@email.com",
+            "password"
         ).execute().body()!!
     }
 }
